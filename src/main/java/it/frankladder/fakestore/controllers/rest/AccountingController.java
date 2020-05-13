@@ -27,7 +27,7 @@ public class AccountingController {
         } catch (MailUserAlreadyExistException e) {
             return new ResponseEntity<>(new ResponseMessage("E-mail address already exist!"), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(new ResponseMessage("Added successful!"), HttpStatus.OK);
+        return new ResponseEntity<>(new ResponseMessage("Added successful!"), HttpStatus.OK); // esempio va tornato l'utente
     }
 
     @GetMapping

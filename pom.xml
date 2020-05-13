@@ -20,7 +20,7 @@
         </repository>
     </repositories>
 
-    <groupId>it.frankladdere</groupId>
+    <groupId>it.frankladder</groupId>
     <artifactId>fakestore</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Fake Store</name>
