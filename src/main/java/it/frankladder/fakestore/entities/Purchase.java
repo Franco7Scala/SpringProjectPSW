@@ -23,7 +23,7 @@ public class Purchase {
     @ManyToOne
     @JoinColumn(name = "buyer")
     private User buyer;
-    @OneToMany(mappedBy = "purchase", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "purchase", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     private List<ProductInPurchase> productsInPurchase;
 
 

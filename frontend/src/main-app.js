@@ -5,8 +5,8 @@ import '@vaadin/vaadin-ordered-layout/src/vaadin-vertical-layout.js';
 import '@vaadin/vaadin-tabs/src/vaadin-tabs.js';
 import '@polymer/iron-pages/iron-pages.js';
 import '@vaadin/vaadin-tabs/src/vaadin-tab.js';
-import './products-search.js'
 import './user-registration.js'
+import './products-search.js'
 
 
 class MainApp extends PolymerElement {
