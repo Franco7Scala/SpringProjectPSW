@@ -16,13 +16,13 @@ public class CheckController {
 
 
     @GetMapping("/simple")
-    public ResponseEntity getInfoClub() {
+    public ResponseEntity checkSimple() {
         return new ResponseEntity("Check status ok!", HttpStatus.OK);
     }
 
     @PreAuthorize("hasAuthority('club')")
     @GetMapping("/logged")
-    public ResponseEntity getServicesQuantity() {
+    public ResponseEntity checkLogged() {
         return new ResponseEntity("Check status ok, hi " + Utils.getEmail() + "!", HttpStatus.OK);
     }
 

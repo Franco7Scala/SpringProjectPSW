@@ -1,7 +1,7 @@
 package it.frankladder.fakestore.controllers.rest;
 
 
-import it.frankladder.fakestore.support.exceptions.MailUserAlreadyExistException;
+import it.frankladder.fakestore.support.exceptions.MailUserAlreadyExistsException;
 import it.frankladder.fakestore.entities.User;
 import it.frankladder.fakestore.services.AccountingService;
 import it.frankladder.fakestore.support.ResponseMessage;
@@ -23,11 +23,11 @@ public class AccountingController {
     @PostMapping
     public ResponseEntity create(@RequestBody @Valid User user) {
         try {
-            accountingService.registerUser(user);
-        } catch (MailUserAlreadyExistException e) {
-            return new ResponseEntity<>(new ResponseMessage("E-mail address already exist!"), HttpStatus.BAD_REQUEST);
+            User added = accountingService.registerUser(user);
+            return new ResponseEntity(added, HttpStatus.OK);
+        } catch (MailUserAlreadyExistsException e) {
+            return new ResponseEntity<>(new ResponseMessage("ERROR_MAIL_USER_ALREADY_EXISTS"), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(new ResponseMessage("Added successful!"), HttpStatus.OK); // esempio va tornato l'utente
     }
 
     @GetMapping

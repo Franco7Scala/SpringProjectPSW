@@ -1,8 +1,8 @@
 package it.frankladder.fakestore.controllers.rest;
 
 
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
+import it.frankladder.fakestore.support.authentication.Utils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,8 +13,9 @@ public class HomeController {
 
 
     @GetMapping("/")
-    public String home(@AuthenticationPrincipal OidcUser user, @RequestParam(value = "someValue") int value) {
-        return "Welcome, " + user.getFullName() + " " + value + " !";
+    @PreAuthorize("hasAuthority('user')")
+    public String home(@RequestParam(value = "someValue") int value) {
+        return "Welcome, " + Utils.getEmail() + " " + value + " !";
     }
 
 

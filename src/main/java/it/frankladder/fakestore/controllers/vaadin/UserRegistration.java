@@ -14,7 +14,7 @@ import com.vaadin.flow.component.dependency.JsModule;
 import com.vaadin.flow.component.polymertemplate.PolymerTemplate;
 import it.frankladder.fakestore.entities.User;
 import it.frankladder.fakestore.services.AccountingService;
-import it.frankladder.fakestore.support.exceptions.MailUserAlreadyExistException;
+import it.frankladder.fakestore.support.exceptions.MailUserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 
@@ -63,7 +63,7 @@ public class UserRegistration extends PolymerTemplate<UserRegistration.UserRegis
                     firstNameTextField.setValue("");
                     codeTextField.setValue("");
                     resultLabel.setText("Done!");
-                } catch (MailUserAlreadyExistException e) {
+                } catch (MailUserAlreadyExistsException e) {
                     resultLabel.setText("Error, email address already exist!");
                 }
             }
