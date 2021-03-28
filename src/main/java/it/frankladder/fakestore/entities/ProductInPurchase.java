@@ -20,11 +20,18 @@ public class ProductInPurchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
+
     @ManyToOne
     @JoinColumn(name = "related_purchase")
     @JsonIgnore
+    @ToString.Exclude
     private Purchase purchase;
-    @ManyToOne
+
+    @Basic
+    @Column(name = "quantity", nullable = true)
+    private int quantity;
+
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "product")
     private Product product;
 

@@ -1,10 +1,12 @@
 package it.frankladder.fakestore.services;
 
 
+import it.frankladder.fakestore.entities.Product;
 import it.frankladder.fakestore.repositories.ProductInPurchaseRepository;
 import it.frankladder.fakestore.repositories.PurchaseRepository;
 import it.frankladder.fakestore.repositories.UserRepository;
 import it.frankladder.fakestore.support.exceptions.DateWrongRangeException;
+import it.frankladder.fakestore.support.exceptions.QuantityProductUnavailableException;
 import it.frankladder.fakestore.support.exceptions.UserNotFoundException;
 import it.frankladder.fakestore.entities.ProductInPurchase;
 import it.frankladder.fakestore.entities.Purchase;
@@ -30,12 +32,19 @@ public class PurchasingService {
 
 
     @Transactional(readOnly = false)
-    public Purchase addPurchase(Purchase purchase) {
+    public Purchase addPurchase(Purchase purchase) throws QuantityProductUnavailableException {
         Purchase result = purchaseRepository.save(purchase);
-        for (ProductInPurchase product : result.getProductsInPurchase() ) {
-            product.setPurchase(result);
-            productInPurchaseRepository.save(product);
-            entityManager.refresh(product);
+        for ( ProductInPurchase pip : result.getProductsInPurchase() ) {
+            pip.setPurchase(result);
+            ProductInPurchase justAdded = productInPurchaseRepository.save(pip);
+            entityManager.refresh(justAdded);
+            Product product = justAdded.getProduct();
+            int newQuantity = product.getQuantity() - pip.getQuantity();
+            if ( newQuantity < 0 ) {
+                throw new QuantityProductUnavailableException();
+            }
+            product.setQuantity(newQuantity);
+            entityManager.refresh(pip);
         }
         entityManager.refresh(result);
         return result;

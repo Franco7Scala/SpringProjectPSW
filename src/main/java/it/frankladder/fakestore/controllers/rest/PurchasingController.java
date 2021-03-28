@@ -6,6 +6,7 @@ import it.frankladder.fakestore.entities.User;
 import it.frankladder.fakestore.services.PurchasingService;
 import it.frankladder.fakestore.support.ResponseMessage;
 import it.frankladder.fakestore.support.exceptions.DateWrongRangeException;
+import it.frankladder.fakestore.support.exceptions.QuantityProductUnavailableException;
 import it.frankladder.fakestore.support.exceptions.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,7 +29,11 @@ public class PurchasingController {
     @PostMapping
     @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity create(@RequestBody @Valid Purchase purchase) { // è buona prassi ritornare l'oggetto inserito
-        return new ResponseEntity<>(purchasingService.addPurchase(purchase), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(purchasingService.addPurchase(purchase), HttpStatus.OK);
+        } catch (QuantityProductUnavailableException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Product quantity unavailable!", e); // realmente il messaggio dovrebbe essrere più esplicativo (es. specificare il prodotto di cui non vi è disponibilità)
+        }
     }
 
     @GetMapping("/{user}")

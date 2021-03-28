@@ -41,7 +41,7 @@ public class Utils {
             jsonNode = objectMapper.readTree(jwtAsString);
         } catch (JsonProcessingException e) {
             log.error(e.getMessage());
-            throw new RuntimeException("Unable to retrieve info's user!");
+            throw new RuntimeException("Unable to retrieve user's info!");
         }
         return jsonNode;
     }

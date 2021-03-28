@@ -18,7 +18,10 @@ CREATE TABLE product (
 	id INTEGER DEFAULT NEXTVAL ('product_seq') PRIMARY KEY,
 	name VARCHAR(50),
 	bar_code VARCHAR(70),
-	description VARCHAR(500)
+	description VARCHAR(500),
+	price FLOAT,
+	quantity FLOAT,
+	version LONG
 );
 
 CREATE SEQUENCE purchase_seq;
@@ -36,6 +39,7 @@ CREATE TABLE product_in_purchase (
 	id INTEGER DEFAULT NEXTVAL ('product_in_purchase_seq') PRIMARY KEY,
 	related_purchase INTEGER,
 	product INTEGER,
+	quantity INTEGER,
     FOREIGN KEY (related_purchase) REFERENCES purchase (id),
     FOREIGN KEY (product) REFERENCES product (id)
 );

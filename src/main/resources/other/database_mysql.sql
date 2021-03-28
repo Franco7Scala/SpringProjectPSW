@@ -16,7 +16,10 @@ CREATE TABLE product (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(50),
 	bar_code VARCHAR(70),
-	description VARCHAR(500)
+	description VARCHAR(500),
+	price FLOAT,
+    quantity FLOAT,
+	version LONG
 );
 
 CREATE TABLE purchase (
@@ -25,11 +28,12 @@ CREATE TABLE purchase (
 	purchase_time DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (buyer) REFERENCES user (id)
 );
-	
+
 CREATE TABLE product_in_purchase (
 	id INTEGER AUTO_INCREMENT PRIMARY KEY,
 	related_purchase INTEGER,
 	product INTEGER,
+    quantity INTEGER,
     FOREIGN KEY (related_purchase) REFERENCES purchase (id),
     FOREIGN KEY (product) REFERENCES product (id)
 );

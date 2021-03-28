@@ -22,15 +22,18 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
+
     @Basic
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "purchase_time")
     private Date purchaseTime;
+
     @ManyToOne
     @JoinColumn(name = "buyer")
     private User buyer;
-    @OneToMany(mappedBy = "purchase", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+
+    @OneToMany(mappedBy = "purchase", cascade = CascadeType.MERGE)
     private List<ProductInPurchase> productsInPurchase;
 
 

@@ -213,6 +213,26 @@
 		{
 			"name": "Purchase creation",
 			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "in",
+							"value": "query",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "apikey",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "00UMW28lB0ONQjj6-C1--_z8vjbDRug6z_g83k6pKC",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -224,7 +244,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"buyer\": {\n\t\t\"id\": 1\n\t},\n\t\"productsInPurchase\": [ \n\t\t{\n\t\t\t\"product\": { \"id\": 1 }\n\t\t},\n\t\t{\n\t\t\t\"product\": { \"id\": 2 }\n\t\t}\n\t]\n}\n"
+					"raw": "{\n\t\"buyer\": {\n\t\t\"id\": 1\n\t},\n\t\"productsInPurchase\": [ \n\t\t{\n\t\t\t\"product\": { \"id\": 1 },\n            \"quantity\": 1\n\t\t},\n\t\t{\n\t\t\t\"product\": { \"id\": 2 },\n            \"quantity\": 2\n\t\t}\n\t]\n}\n"
 				},
 				"url": {
 					"raw": "localhost:8080/purchases",
