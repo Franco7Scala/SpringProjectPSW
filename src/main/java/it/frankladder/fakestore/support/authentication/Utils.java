@@ -24,7 +24,7 @@ public class Utils {
     }
 
     public String getName() {
-        return getTokenNode().get("claims").get("name").asText();
+        return getTokenNode().get("sub").asText();
     }
 
     public String getEmail() {

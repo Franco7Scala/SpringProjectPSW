@@ -1,0 +1,38 @@
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8443/auth/realms/rendicontation/protocol/openid-connect/certs
+          issuer-uri: http://localhost:8443/auth/realms/rendicontation
+  application:
+    name: FakeStore-API
+  datasource:
+    password: '***'
+    driver-class-name: com.mysql.jdbc.Driver
+    username: '***'
+    url: jdbc:mysql://localhost:3306/orders?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+
+server:
+  #ssl:
+    #key-store-password: password_certificate
+    #key-store-type: PKCS12
+    #key-store: /home/debian/ssl-cert/certificate.p12
+  compression:
+    enabled: 'true'
+  port: '8080'
+
+#security:
+  #require-ssl: 'true'
+
+keycloak:
+  resource: fakestore-flutter
+
+logging:
+  level:
+    it:
+      frankladder: DEBUG
+    org:
+      springframework: INFO
