@@ -49,7 +49,7 @@ public class PurchasingController {
     public ResponseEntity getPurchasesInPeriod(@Valid @PathVariable("user") User user, @PathVariable("startDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date start, @PathVariable("endDate") @DateTimeFormat(pattern = "dd-MM-yyyy") Date end) {
         try {
             List<Purchase> result = purchasingService.getPurchasesByUserInPeriod(user, start, end);
-            if ( result.size() <= 0 ) {
+            if (result.isEmpty()) {
                 return new ResponseEntity<>(new ResponseMessage("No results!"), HttpStatus.OK);
             }
             return new ResponseEntity<>(result, HttpStatus.OK);

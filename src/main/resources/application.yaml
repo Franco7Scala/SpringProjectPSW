@@ -15,6 +15,12 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.MySQL5Dialect
 
+jwt:
+  auth:
+    converter:
+      resource-id: fakestore-flutter
+      principle-attribute: preferred_username
+
 server:
   #ssl:
     #key-store-password: password_certificate
@@ -26,9 +32,6 @@ server:
 
 #security:
   #require-ssl: 'true'
-
-keycloak:
-  resource: fakestore-flutter
 
 logging:
   level:
