@@ -11,10 +11,10 @@ import it.frankladder.fakestore.support.exceptions.UserNotFoundException;
 import it.frankladder.fakestore.entities.ProductInPurchase;
 import it.frankladder.fakestore.entities.Purchase;
 import it.frankladder.fakestore.entities.User;
+import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import javax.persistence.EntityManager;
 import java.util.Date;
 import java.util.List;
 
